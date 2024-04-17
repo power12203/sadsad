@@ -8,8 +8,20 @@ import { thunk } from "redux-thunk";
 import rootReducer from "./modules";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import { set_user, check } from "./modules/user";
 
 const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
+function localUser() {
+  try {
+    const user = localStorage.getItem("user");
+    if (!user) return;
+    store.dispatch(set_user(JSON.parse(user)));
+    store.dispatch(check());
+  } catch (e) {
+    console.log(e);
+  }
+}
+localUser();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

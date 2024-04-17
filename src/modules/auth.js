@@ -23,11 +23,30 @@ export const register = (username, password) => async (dispatch) => {
   try {
     const response = await api.register(username, password);
     dispatch({ type: REGISTER_SUCCESS, payload: response.data });
-  } catch (e) {
-    dispatch({ type: REGISTER_FAILURE, payload: e, error: true });
-    throw e;
+  } catch (error) {
+    dispatch({ type: REGISTER_FAILURE, payload: error });
+    throw error;
+  } finally {
+    finish_loading(REGISTER_LOADING);
+    return;
   }
-  finish_loading(REGISTER_FAILURE);
+};
+const LOGIN_LOADING = "loginLoading";
+const LOGIN_SUCCESS = "auth/LOGIN_SUCCESS";
+const LOGIN_FAILURE = "auth/LOGIN_FAILURE";
+
+export const login = (username, password) => async (dispatch) => {
+  start_loading(LOGIN_LOADING);
+  try {
+    const response = await api.login(username, password);
+    dispatch({ type: LOGIN_SUCCESS, payload: response.data });
+  } catch (error) {
+    dispatch({ type: LOGIN_FAILURE, payload: error });
+    throw error;
+  } finally {
+    finish_loading(LOGIN_LOADING);
+    return;
+  }
 };
 
 const initialState = {
@@ -52,6 +71,8 @@ const auth = handleActions(
         ...state[form],
         [key]: value,
       },
+      auth: null,
+      authError: null,
     }),
     [RESET_FORM]: (state, { form }) => ({
       ...state,
@@ -67,8 +88,35 @@ const auth = handleActions(
       auth: null,
       authError,
     }),
+    [LOGIN_SUCCESS]: (state, { payload: auth }) => ({
+      ...state,
+      authError: null,
+      auth,
+    }),
+    [LOGIN_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      auth: null,
+      authError: error,
+    }),
   },
   initialState
 );
 
 export default auth;
+
+// const LOGIN_LOADING = "loginLoading";
+// const LOGIN_SUCCESS = "auth/LOGIN_SUCCESS";
+// const LOGIN_FAILURE = "auth/LOGIN_FAILURE";
+
+// export const register = (username, password) => async (dispatch) => {
+//   start_loading(LOGIN_LOADING);
+//   try {
+//     const response = await api.register(username, password);
+//     dispatch({ type: LOGIN_SUCCESS, payload: response.data });
+//   } catch (error) {
+//     dispatch({ type: REGISTER_FAILURE, payload: error });
+//   } finally {
+//     finish_loading(LOGIN_FAILURE);
+//     return;
+//   }
+// };

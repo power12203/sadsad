@@ -23,4 +23,10 @@ export const check = () => {
   const response = request.get("api/auth/check");
   return response;
 };
+
+export const logout = () => {
+  const response = request.post("api/auth/logout");
+  return response;
+};
+
 //http://13.209.96.80:4000

@@ -9,6 +9,7 @@ export const finish_loading = (mode) => ({ type: FINISH_LOADING, mode });
 const initialState = {
   loginLoading: false,
   registerLoading: false,
+  checkLoading: false,
 };
 export const loading = handleActions(
   {

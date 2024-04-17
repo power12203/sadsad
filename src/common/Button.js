@@ -4,6 +4,7 @@ import palette from "./palette";
 import { Link } from "react-router-dom";
 
 const SButton = css`
+  text-decoration: none;
   border: none;
   border-radius: 4px;
   font-size: 1rem;

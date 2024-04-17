@@ -29,6 +29,8 @@ const InputStyle = styled.input`
 
 const ButtonStyle = styled(Button)`
   margin-top: 1rem;
+  height: 35px;
+  width: 335px;
 `;
 
 const FootDiv = styled.div`
@@ -42,12 +44,18 @@ const FootDiv = styled.div`
     }
   }
 `;
+const ErrorMessage = styled.div`
+  color: red;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+`;
 const textType = {
   login: "로그인",
   register: "회원 가입",
 };
 const Form = (props) => {
-  const { mode, form, onChange, onSubmit } = props;
+  const { mode, form, onChange, onSubmit, error } = props;
   const text = textType[mode];
   console.log(form);
   return (
@@ -79,9 +87,8 @@ const Form = (props) => {
             type="password"
           />
         )}
-        <ButtonStyle fullWidth Cyan>
-          {text}
-        </ButtonStyle>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+        <ButtonStyle Cyan>{text}</ButtonStyle>
       </form>
       <FootDiv>
         {mode === "login" ? (
