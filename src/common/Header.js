@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Button from "./Button";
 import Responsive from "./Responsive";
 import palette from "./palette";
+import { logout } from "../modules/user";
+import { connect } from "react-redux";
 
 const HeaderDiv = styled.div`
   position: fixed;
@@ -33,7 +35,11 @@ const SpaceDiv = styled.div`
   height: 4rem;
 `;
 const Header = (props) => {
-  const { user, onLogout } = props;
+  const { user, logout } = props;
+
+  const onClick = () => {
+    logout();
+  };
   return (
     <>
       <HeaderDiv>
@@ -44,7 +50,7 @@ const Header = (props) => {
           {user ? (
             <div className="right">
               <div style={{ marginRight: "5px" }}>{user.username}</div>
-              <Button onClick={onLogout}>로그아웃</Button>
+              <Button onClick={onClick}>로그아웃</Button>
             </div>
           ) : (
             <div className="right">
@@ -61,4 +67,11 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+export default connect(
+  (state) => ({
+    user: state.user.user,
+  }),
+  {
+    logout,
+  }
+)(Header);

@@ -10,6 +10,8 @@ const initialState = {
   loginLoading: false,
   registerLoading: false,
   checkLoading: false,
+  writeLoading: false,
+  readLoading: false,
 };
 export const loading = handleActions(
   {

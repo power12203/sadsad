@@ -64,7 +64,7 @@ const user = handleActions(
       user: null,
       checkError,
     }),
-    [LOGOUT]: (state, { payload: answer }) => ({
+    [LOGOUT]: (state, { payload: user, checkError }) => ({
       ...state,
       user: null, // 사용자 정보 초기화
       checkError: null,

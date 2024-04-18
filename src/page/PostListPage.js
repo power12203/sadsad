@@ -6,12 +6,10 @@ import { logout } from "../modules/user";
 const PostListPage = (props) => {
   const { user } = props;
   const { logout } = props;
-  const onLogout = () => {
-    logout();
-  };
+
   return (
     <>
-      <Header user={user} onLogout={onLogout} />
+      <Header user={user} logout={logout} />
       <div>하이욤</div>
     </>
   );
