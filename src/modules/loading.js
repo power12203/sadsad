@@ -12,6 +12,8 @@ const initialState = {
   checkLoading: false,
   writeLoading: false,
   readLoading: false,
+  listLoading: false,
+  updateLoading: false,
 };
 export const loading = handleActions(
   {

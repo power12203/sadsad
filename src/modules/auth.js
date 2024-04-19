@@ -22,6 +22,7 @@ export const register = (username, password) => async (dispatch) => {
   start_loading(REGISTER_LOADING);
   try {
     const response = await api.register(username, password);
+    console.log(username, password, "hello");
     dispatch({ type: REGISTER_SUCCESS, payload: response.data });
   } catch (error) {
     dispatch({ type: REGISTER_FAILURE, payload: error });

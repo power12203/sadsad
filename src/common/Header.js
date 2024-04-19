@@ -1,11 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useCallback } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "./Button";
 import Responsive from "./Responsive";
 import palette from "./palette";
 import { logout } from "../modules/user";
 import { connect } from "react-redux";
+import { reset_posts } from "../modules/postList";
 
 const HeaderDiv = styled.div`
   position: fixed;
@@ -35,11 +36,13 @@ const SpaceDiv = styled.div`
   height: 4rem;
 `;
 const Header = (props) => {
-  const { user, logout } = props;
-
-  const onClick = () => {
+  const { user, logout, reset_posts } = props;
+  const navigate = useNavigate();
+  const onClick = useCallback(() => {
     logout();
-  };
+    reset_posts();
+    navigate("/");
+  }, [logout, reset_posts, navigate]);
   return (
     <>
       <HeaderDiv>
@@ -73,5 +76,6 @@ export default connect(
   }),
   {
     logout,
+    reset_posts,
   }
 )(Header);

@@ -19,7 +19,7 @@ const LoginPage = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { username, password } = form;
-    console.log(username);
+    console.log(username, password);
     login(username, password);
   };
   useEffect(() => {
@@ -43,7 +43,7 @@ const LoginPage = (props) => {
       } catch (e) {
         console.log("localStorage is not working");
       }
-      navigate("/");
+      navigate(`/${user.username}`);
     }
   }, [user, navigate]);
   if (loginLoading) return <div>loading...</div>;

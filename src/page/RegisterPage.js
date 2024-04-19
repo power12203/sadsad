@@ -22,7 +22,6 @@ const RegisterPage = (props) => {
     e.preventDefault();
 
     const { username, password, passwordConfirm } = form;
-    console.log(username);
     if ([username, password, passwordConfirm].includes("")) {
       setError("빈칸을 모두 입력하세용");
       return;

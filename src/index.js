@@ -9,8 +9,11 @@ import rootReducer from "./modules";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { set_user, check } from "./modules/user";
+import { createLogger } from "redux-logger";
 
-const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
+const logger = createLogger();
+
+const store = legacy_createStore(rootReducer, applyMiddleware(thunk, logger));
 function localUser() {
   try {
     const user = localStorage.getItem("user");

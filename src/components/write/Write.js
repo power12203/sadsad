@@ -57,12 +57,17 @@ const Write = (props) => {
       }
     });
   }, [chang_field]);
+
   const onChange = useCallback(
     (e) => {
       chang_field("title", e.target.value); //title
     },
     [chang_field]
   );
+  // const Click = (e) => {
+  //   chang_field(title);
+  //   navigate("/");
+  // };
   return (
     <WriteDiv>
       <TitleInput

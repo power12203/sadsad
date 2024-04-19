@@ -8,7 +8,7 @@ export const login = (username, password) =>
     password,
   });
 export const register = (username, password) =>
-  request.post("api/auth/register", { username, password });
+  request.post("/api/auth/register", { username, password });
 
 export const check = () => request.get("api/auth/check");
 export const logout = () => request.post("/api/auth/logout");

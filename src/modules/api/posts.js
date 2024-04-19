@@ -6,6 +6,13 @@ export const write_post = (title, body, tags) =>
 
 export const read_post = (id) => request.get(`/api/posts/${id}`);
 
+export const list_post = (page, username, tag) =>
+  request.get(`/api/posts`, { params: { page, username, tag } });
+
+export const update_post = (id, title, body, tags) =>
+  request.patch(`/api/posts/${id}`, { title, body, tags });
+
+export const remove_post = (id) => request.delete(`/api/posts/${id}`);
 // import { createAction, handleActions } from "redux-actions";
 // import { produce } from "immer";
 // import * as authAPI from "../lib/api/auth";
