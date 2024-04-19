@@ -34,6 +34,7 @@ const WritePage = (props) => {
     } else {
       write_post(title, body, tags);
     }
+    navigate(-1);
   };
   const onCancel = useCallback(() => {
     navigate(-1);

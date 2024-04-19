@@ -13,10 +13,10 @@ const PostPage = (props) => {
   const { post, postError, readLoading, user } = props;
   const { read_post, logout, set_post } = props;
   const navigate = useNavigate();
-  console.log(post);
+
   const onEdit = useCallback(() => {
     set_post(post);
-    navigate("/write");
+    navigate(`/write/${postId}`);
   }, []);
   useEffect(() => {
     read_post(postId);
