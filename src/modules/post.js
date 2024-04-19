@@ -6,6 +6,10 @@ const READ_LOADING = "readLoading";
 const READ_SUCCESS = "post/READ_SUCCESS";
 const READ_FAILURE = "post/READ_FAILURE";
 
+const REMOVE_LOADING = "removeLoading";
+const REMOVE_SUCCESS = "post/REMOVE_SUCCESS";
+const REMOVE_FAILURE = "post/REMOVE_FAILURE";
+
 export const read_post = (postId) => async (dispatch) => {
   console.log(postId);
   start_loading(READ_LOADING);
@@ -18,6 +22,19 @@ export const read_post = (postId) => async (dispatch) => {
   } finally {
     finish_loading(READ_LOADING);
     return;
+  }
+};
+
+export const remove_post = (id) => async (dispatch) => {
+  start_loading(REMOVE_LOADING);
+  try {
+    await api.remove_post(id);
+    dispatch({ type: REMOVE_SUCCESS, payload: id });
+  } catch (error) {
+    dispatch({ type: REMOVE_FAILURE, payload: error });
+    throw error;
+  } finally {
+    finish_loading(REMOVE_LOADING);
   }
 };
 
@@ -37,6 +54,17 @@ const post = handleActions(
       ...state,
       post: null,
       postError,
+    }),
+    [REMOVE_SUCCESS]: (state, { payload: postId }) => ({
+      ...state,
+      postId: null,
+      title: "",
+      body: "",
+      tags: [],
+    }),
+    [REMOVE_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      error,
     }),
   },
   initialState

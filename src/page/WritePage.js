@@ -40,6 +40,8 @@ const WritePage = (props) => {
     navigate(-1);
   }, [navigate]);
 
+  console.log("writer", writer);
+
   useEffect(() => {
     reset_write();
     if (writer) {
