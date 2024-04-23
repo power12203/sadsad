@@ -25,11 +25,12 @@ const ActionButton = styled.button`
   }
 `;
 
-const PostActionButtons = ({ onEdit, onRemove }) => {
+const PostActionButtons = (props) => {
+  const { onEdit, onRemoveClick } = props;
   return (
     <PostActionButtonsDiv>
       <ActionButton onClick={onEdit}>수정</ActionButton>
-      <ActionButton onClick={onRemove}>삭제</ActionButton>
+      <ActionButton onClick={onRemoveClick}>삭제</ActionButton>
     </PostActionButtonsDiv>
   );
 };

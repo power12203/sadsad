@@ -1,10 +1,9 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 import palette from "./palette";
-import { Link } from "react-router-dom";
 
-const SButton = css`
-  text-decoration: none;
+const buttonStyle = css`
   border: none;
   border-radius: 4px;
   font-size: 1rem;
@@ -13,52 +12,48 @@ const SButton = css`
   color: white;
   outline: none;
   cursor: pointer;
-  background: ${palette.Gray[8]};
+  margin-top: 1rem;
+
+  background: ${palette.Orange[8]};
   &:hover {
-    background: ${palette.Gray[6]};
+    background: ${palette.Orange[6]};
   }
-  ${(props) =>
+
+  ${props =>
     props.fullWidth &&
     css`
-      padding-top: 0.5rem;
-      padding-bottom: 0.6rem;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
       width: 100%;
       font-size: 1.125rem;
     `}
-  ${(props) =>
-    props.Cyan &&
+
+  ${props =>
+    props.orange &&
     css`
-      background: ${palette.Cyan[5]};
+      background: ${palette.Orange[5]};
       &:hover {
-        background: ${palette.Cyan[4]};
+        background: ${palette.Orange[4]};
       }
     `}
-  ${(props) =>
-    props.Indigo &&
-    css`
-      background: ${palette.Indigo[5]};
-      &:hover {
-        background: ${palette.Indigo[4]};
-      }
-    `}
-  &:disabled {
-    background: ${palette.Cyan[3]};
-    color: ${palette.Cyan[5]};
+  &:disabled{
+    background: ${palette.Gray[3]};
+    color: ${palette.Gray[5]};
     cursor: not-allowed;
   }
 `;
 
 const StyledButton = styled.button`
-  ${SButton}
+  ${buttonStyle}
 `;
 
 const StyledLink = styled(Link)`
-  ${SButton}
+  ${buttonStyle}
 `;
 
-const Button = (props) => {
+const Button = props => {
   return props.to ? (
-    <StyledLink {...props} Cyan={props.Cyan ? 1 : 0} />
+    <StyledLink {...props} indigo={props.indigo ? 1 : 0} />
   ) : (
     <StyledButton {...props} />
   );
